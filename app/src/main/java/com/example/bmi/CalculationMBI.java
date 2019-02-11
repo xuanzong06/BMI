@@ -39,6 +39,6 @@ public class CalculationMBI extends AppCompatActivity {
         float height1 = Float.parseFloat(h);
         float weight1 = Float.parseFloat(w);
         float bmi = weight1 / (height1/100 * height1/100);
-        Toast.makeText(this, String.valueOf(bmi), Toast.LENGTH_LONG);
+        Toast.makeText(this, String.valueOf(bmi), Toast.LENGTH_LONG).show();
     }
 }
