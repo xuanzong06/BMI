@@ -120,3 +120,107 @@ Module 22. 認識資料庫異動
 參考一下:
 120.105.184.250 › lwcheng › kid51 › kidpps › kid51_chap14
 keyword : 分散式異動 範例
+
+*******************************************************************************************************************************
+Module 23. 資料庫異動控制實作
+23.1	TransactionScope
+23.2	CommittableTransaction 
+23.3	DTC 分散式交易
+參考資料:
+
+目錄
+1.
+2.
+3.
+4.
+5.
+
+23.1 TransactionScope 類別
+1.TransactionScope 類別→使程式碼區塊成為異動式。 這個類別無法被繼承。
+2.System.Transactions 基礎結構同時提供以 Transaction 類別為基礎的明確程式設計模型
+3.以及使用 TransactionScope 類別的隱含程式設計模型，其中的交易會由基礎結構自動管理
+4.當 new 語句具現化 TransactionScope 時，交易管理員會決定要參與哪個交易
+5.一旦決定後，範圍永遠會參與該異動。
+
+(二)
+1.此決策是根據兩個因素而定：環境異動是否存在，以及建構函式中的 TransactionScopeOption 參數值
+2.環境交易是您的程式碼執行所在的交易
+3.您可以呼叫 Transaction.Current 類別的靜態 Transaction 屬性，取得環境交易的參考
+4.如果交易範圍內發生例外狀況→會回復它所參與的交易
+5.如果交易範圍內未發生例外狀況→則允許範圍所參與的交易繼續進行
+
+(三)
+1.當程式完成在交易中執行的所有工作時，要設計呼叫 Complete 方法一次(只能一次)
+2.告知交易管理員可接受認可交易。 如果無法呼叫這個Complete方法，就會中止交易
+3.呼叫 Dispose 方法會標記交易範圍的結尾
+4.在呼叫Dispose方法後發生的例外狀況 通常不太可能會影響異動。
+5.
+
+參考https://docs.microsoft.com/zh-tw/dotnet/api/system.transactions.transactionscope?view=netframework-4.8
+(四)程式範例
+1.
+2.
+3.
+4.
+5.
+
+23.2 CommittableTransaction
+1.CommittableTransaction 類別→描述可認可的交易
+2.CommittableTransaction 類別為應用程式提供使用交易的明確方式，而非隱含地使用 TransactionScope 類別
+3.通常會用 TransactionScope 類別來建立隱含交易，以便自動管理環境交易內容
+4.建立 CommittableTransaction 不會自動設定環境交易
+5.要取得或是設定環境需要呼叫全域 Transaction 物件的靜態 Transaction.Current 屬性來取得
+
+參考連結:https://docs.microsoft.com/zh-tw/dotnet/api/system.transactions.committabletransaction?view=netframework-4.8
+(二)建構函式
+1.
+2.
+3.
+4.
+5.
+
+參考連結:https://docs.microsoft.com/zh-tw/dotnet/framework/data/transactions/implementing-an-explicit-transaction-using-committabletransaction
+(三)使用 CommittableTransaction 實作明確交易
+1.CommittableTransaction 類別係衍生自 Transaction 類別，因此可提供Transaction 類別的所有功能
+2.Rollback 類別上的 Transaction 方法特別有用，因為它同時能用來復原 CommittableTransaction 物件
+3.Transaction 類別與 CommittableTransaction 類別類似，但是不會提供 Commit 方法
+4.它能讓您在控制交易認可時間的同時，將交易物件 (或其複製品) 傳遞給其他方法 (可能透過其他執行緒)
+5.呼叫的程式碼可以登記並投票給交易，但是只有 CommittableTransaction 物件的建立者有能力認可交易。
+
+參考連結:https://docs.microsoft.com/zh-tw/dotnet/framework/data/transactions/implementing-an-explicit-transaction-using-committabletransaction
+(四)建立 CommittableTransaction
+1.
+2.
+3.
+4.
+5.
+
+參考連結:https://dotblogs.com.tw/echo/2017/08/24/windows_msdtc_setting
+參考連結:https://blog.darkthread.net/blog/category/MSDTC
+23.3 DTC 分散式交易
+1.
+2.
+3.
+4.
+5.
+
+(二)
+1.
+2.
+3.
+4.
+5.
+
+(三)
+1.
+2.
+3.
+4.
+5.
+
+(四)
+1.
+2.
+3.
+4.
+5.
