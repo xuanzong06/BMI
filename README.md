@@ -224,3 +224,108 @@ Module 23. 資料庫異動控制實作
 3.
 4.
 5.
+**********************************************************************************************************
+Module 33. TableAdapter
+33.1	Update / AcceptChange
+33.2	GetChanged / DataRowState - 資料列狀態
+33.3	資料衝突
+
+參考連結:https://docs.microsoft.com/zh-tw/visualstudio/data-tools/fill-datasets-by-using-tableadapters?view=vs-2019
+
+目錄
+1.TableAdapter 元件會根據程式指定的一或多個查詢or預存程式，將資料庫中的資料填入資料集→Fill()方法
+2.Tableadapter 也可以在資料庫上執行作業→新增、刪除、更新
+3.不過要注意的是，Tableadapter 是由 Visual Studio 設計工具產生的，我們無法直接撰寫程式碼使用TableAdapter
+4.
+5.
+/*我自己的想法是TableAdapter將資料給DataSet後，但其他方法都是DataSet使用*/
+datatable AcceptChange 參考連結:https://docs.microsoft.com/zh-tw/dotnet/api/system.data.datatable.acceptchanges?view=netframework-4.8
+
+tableadapter.update :https://docs.microsoft.com/zh-tw/visualstudio/data-tools/update-data-by-using-a-tableadapter?view=vs-2019
+
+33.1 Update / AcceptChange
+1.TableAdapter 的更新功能取決於Tableadapter Wizard的主要查詢中有多少可用的資訊
+2.
+3.
+4.
+5.
+
+(二)
+1.
+2.
+3.
+4.
+5.
+
+(三)
+1.
+2.
+3.
+4.
+5.
+
+(四)
+1.
+2.
+3.
+4.
+5.
+
+33.2
+1.
+2.
+3.
+4.
+5.
+
+(二)
+1.
+2.
+3.
+4.
+5.
+
+(三)
+1.
+2.
+3.
+4.
+5.
+
+(四)
+1.
+2.
+3.
+4.
+5.
+
+33.3
+1.
+2.
+3.
+4.
+5.
+
+(二)
+1.
+2.
+3.
+4.
+5.
+
+(三)
+1.
+2.
+3.
+4.
+5.
+
+(四)
+1.
+2.
+3.
+4.
+5.
+
+484要建立一個資料庫的資料表
+架構簡單一點用來做測試
